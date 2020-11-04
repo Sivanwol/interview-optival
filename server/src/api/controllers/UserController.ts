@@ -1,5 +1,5 @@
 import {
-    Authorized, Body, CurrentUser, Delete, Get, JsonController, OnUndefined, Param, Post, Put, Req
+    Authorized, Body, Delete, Get, JsonController, OnUndefined, Param, Put
 } from 'routing-controllers';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 
