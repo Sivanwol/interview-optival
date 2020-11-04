@@ -1,9 +1,6 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class moviesEmotes1604502076544 implements MigrationInterface {
-
-
-
+export class MoviesEmotes1604502076544 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<any> {
         const table = new Table({
             name: 'movie_emotes',

@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { Authorized, Body, CurrentUser, Get, JsonController, Post, Req } from 'routing-controllers';
+import { Authorized, Body, JsonController, Post } from 'routing-controllers';
 import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 
 import { AuthService } from '../../auth/AuthService';
@@ -44,14 +44,4 @@ export class AuthController {
         user.access_token =  jwt.sign({ id: user.id }, env.app.secretOrKey );
         return user;
     }
-
-    @Get('/logout')
-    @Authorized()
-    @ResponseSchema(UserResponse, {
-        description: 'logout user',
-    })
-    public async logout(@CurrentUser({ required: true }) user: Users, @Req() request): Promise<void> {
-        request.logout();
-    }
-
 }

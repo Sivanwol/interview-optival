@@ -29,16 +29,16 @@ export class MoviesService {
     }
 
     public async getEmote(emote_id: number): Promise<Emote | undefined> {
-        return this.emoteRepository.findOne(emote_id);;
+        return this.emoteRepository.findOne(emote_id);
     }
 
-    public async hasMovie(movie_id:number): Promise<boolean> {
+    public async hasMovie(movie_id: number): Promise<boolean> {
         this.log.info('verify if movie existed' , movie_id);
         const movie = await this.getMovie(movie_id);
         return !!movie;
     }
 
-    public async hasEmote(emote_id:number): Promise<boolean> {
+    public async hasEmote(emote_id: number): Promise<boolean> {
         this.log.info('verify if emote existed' , emote_id);
         const emote = await this.getEmote(emote_id);
         return !!emote;
@@ -54,18 +54,18 @@ export class MoviesService {
         return movie;
     }
 
-    public async delete(movie_id: number ) :Promise<void> {
+    public async delete(movie_id: number ): Promise<void> {
         this.log.info('delete movie', movie_id);
         await this.movieRepository.delete(movie_id);
     }
 
-    public async getEmoteList() : Promise<Emote[]> {
+    public async getEmoteList(): Promise<Emote[]> {
         this.log.info('fetching emotes');
         return this.emoteRepository.find({});
     }
 
-    public async triggerUserToMovieEmote(movie_id: number , emote_id: number, user_id: number) {
-        const hasBoundEmouteOnUserAndMovie = await this.movieRepository.hasEmoteOnMovie(movie_id,emote_id, user_id);
+    public async triggerUserToMovieEmote(movie_id: number , emote_id: number, user_id: number): Promise<Movie> {
+        const hasBoundEmouteOnUserAndMovie = await this.movieRepository.hasEmoteOnMovie(movie_id, emote_id, user_id);
         const movie = await this.getMovie(movie_id);
         const emote = await this.getEmote(emote_id);
         if (hasBoundEmouteOnUserAndMovie) {
@@ -74,5 +74,6 @@ export class MoviesService {
             movie.emotes.push(emote);
         }
         this.movieRepository.save(movie);
+        return this.getMovie(movie_id);
     }
 }
