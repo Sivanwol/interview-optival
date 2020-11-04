@@ -1,0 +1,10 @@
+[client]
+host     = %
+user     = root
+password = 4a72-9bfa-53
+socket   = /var/run/mysqld/mysqld.sock
+[mysql_upgrade]
+host     = %
+user     = root
+password = 4a72-9bfa-53
+socket   = /var/run/mysqld/mysqld.sock
