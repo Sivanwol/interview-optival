@@ -44,6 +44,7 @@ export class MoviesService {
         const emote = await this.getEmote(emote_id);
         return !!emote;
     }
+
     public async update(movie_id: number, data: MovieRequest): Promise<Movie> {
         this.log.info('update movie', movie_id, data);
         const movie = await this.getMovie(movie_id);
