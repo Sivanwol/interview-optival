@@ -85,9 +85,6 @@ All script are defined in the `package-scripts.js` file, but the most important 
 - To revert your latest migration run `yarn start db.revert`.
 - Drops the complete database schema `yarn start db.drop`.
 
-### Database Seeding
-
-- Run `yarn start db.seed` to seed your seeds into the database.
 
 ![divider]
 

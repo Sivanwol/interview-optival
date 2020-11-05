@@ -4,17 +4,16 @@ import { JSONSchema } from 'class-validator-jsonschema';
 import { BaseResponseEntity } from './common/BaseResponseEntity';
 
 @JSONSchema({
-    description: 'A movie object',
+    description: 'A Emotes object',
     example: {
-        name: 'movie name',
-        slug: 'movie slug',
-        description: 'movie description',
-        imdbLink: 'https://www.imdb.com/title/tt10048342/?ref_=hm_fanfav_tt_1_pd_fp1',
+        name: 'emotes name',
+        alt: 'text alt',
+        icon: 'icon-up',
     },
 })
-export class MovieResponse extends BaseResponseEntity {
+export class EmoteResponse extends BaseResponseEntity {
     @JSONSchema({
-        description: 'movie name',
+        description: 'emote name',
     })
     @IsNotEmpty()
     @MinLength(2, {
@@ -26,32 +25,19 @@ export class MovieResponse extends BaseResponseEntity {
     public name: string;
 
     @JSONSchema({
-        description: 'movie slug',
+        description: 'text alt',
     })
     @IsNotEmpty()
-    @MinLength(10, {
+    @MinLength(2, {
         message: 'slug is too short',
     })
-    public slug: string;
+    public alt: string;
 
     @JSONSchema({
-        description: 'movie description',
+        description: 'emote icon',
     })
     @MaxLength(500, {
         message: 'username is too long',
     })
-    public description: string;
-
-    @JSONSchema({
-        description: 'imdb link',
-    })
-    @IsUrl()
-    @IsNotEmpty()
-    @MinLength(7, {
-        message: 'imdb link is too short',
-    })
-    @MaxLength(255, {
-        message: 'imdb link is too long',
-    })
-    public IMDBLink: string;
+    public icon: string;
 }

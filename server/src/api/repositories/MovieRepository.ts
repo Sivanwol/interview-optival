@@ -10,4 +10,5 @@ export class MovieRepository extends Repository<Movie>  {
             .getOne();
         return !!hasEmote;
     }
+
 }
