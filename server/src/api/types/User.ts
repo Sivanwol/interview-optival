@@ -23,9 +23,4 @@ export class User {
     })
     public email: string;
 
-    @Field(type => [Pet], {
-        description: 'A list of pets which belong to the user.',
-    })
-    public pets: Pet[];
-
 }
