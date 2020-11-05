@@ -1,0 +1,11 @@
+<div class="center">
+  <p-listbox
+    [options]="stocks"
+    [(ngModel)]="selectedStocks"
+    [multiple]="true"
+    [filter]="true"
+    [checkbox]="true"
+    [listStyle]="{'max-height':'250px','height':'250px'}"
+    (ngModelChange)="onSelectChange($event)"
+  ></p-listbox>
+</div>

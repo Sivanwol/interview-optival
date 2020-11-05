@@ -1,0 +1,61 @@
+<div class="login-card">
+  <form [formGroup]="form">
+    <p-panel>
+      <p-header>
+        Stock Query Service
+      </p-header>
+      <div class="ui-g">
+        <div class="ui-g-12">
+          <span class="ui-float-label">
+            <input
+              id="float-input"
+              type="email"
+              formControlName="email"
+              size="30"
+              pInputText
+            />
+            <label for="float-input">Email</label>
+          </span>
+        </div>
+        <div class="ui-g-12">
+          <span class="ui-float-label">
+            <input
+              id="float-input"
+              type="password"
+              formControlName="password"
+              size="30"
+              pInputText
+            />
+            <label for="float-input">Password</label>
+          </span>
+        </div>
+        <div
+          class="ui-g-6"
+          *ngIf="form.invalid && (form.dirty || form.touched)"
+          class="alert alert-danger"
+        >
+          <p-message
+            *ngIf="form.invalid && form.errors && form.errors.required"
+            severity="error"
+            text="Field is required"
+          ></p-message>
+          <p-message
+            *ngIf="form.invalid && form.errors && form.errors.minlength"
+            severity="error"
+            text="Password Field not match as password"
+          ></p-message>
+        </div>
+      </div>
+      <p-footer>
+        <button
+          pButton
+          (click)="onLoginHandler()"
+          class="login-btn ui-button-rounded"
+          label="Login"
+        >
+
+        </button>
+      </p-footer>
+    </p-panel>
+  </form>
+</div>
