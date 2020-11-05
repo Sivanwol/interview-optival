@@ -1,6 +1,5 @@
 import { Service } from 'typedi';
 import { OrmRepository } from 'typeorm-typedi-extensions';
-import { runInThisContext } from 'vm';
 
 import { Logger, LoggerInterface } from '@src/decorators/Logger';
 
@@ -79,26 +78,26 @@ export class MoviesService {
         return this.getMovie(movie_id);
     }
 
-    public async hasUserFavMovie(movie_id:number, user_id: number) : Promise<boolean> {
+    public async hasUserFavMovie(movie_id: number, user_id: number): Promise<boolean> {
         const query = await this.movieRepository.createQueryBuilder('movie')
         .leftJoin('movie.favorites', 'favorites')
-        .where('favorites.user_id = :user_id AND favorites.movie_id = :movie_id' , {user_id,movie_id})
+        .where('favorites.user_id = :user_id AND favorites.movie_id = :movie_id' , {user_id, movie_id})
         .getOne();
         return !!query;
     }
 
-    public async toggleUserFavMovie(movie_id:number, user_id: number , rating?: number) : Promise<void> {
+    public async toggleUserFavMovie(movie_id: number, user_id: number , rating?: number): Promise<void> {
         const movie = await this.getMovie(movie_id);
         const hasfav = await this.hasUserFavMovie(movie_id, user_id) ;
-        if (hasfav&& rating === null) {
+        if (hasfav && rating === null) {
             movie.favorites.filter(mf => mf.user_id !== user_id && mf.movie_id !== movie_id);
         } else {
             if (hasfav) {
-                const fav = movie.favorites.find(mf =>mf.user_id === user_id && mf.movie_id === movie_id);
+                const fav = movie.favorites.find(mf => mf.user_id === user_id && mf.movie_id === movie_id);
                 fav.rating = rating;
             } else {
                 const mf = new MovieFavorites();
-                mf.movie_id = movie_id
+                mf.movie_id = movie_id;
                 mf.user_id = user_id;
                 mf.rating = rating;
                 movie.favorites.push(mf);
