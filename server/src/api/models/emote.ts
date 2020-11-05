@@ -3,7 +3,9 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 import { BaseModelCreationUpdateTimes } from '../utils/models/BaseModelCreationUpdateTimes';
 
-@Entity()
+@Entity({
+    name: 'emotes',
+})
 export class Emote extends  BaseModelCreationUpdateTimes {
     @PrimaryGeneratedColumn({name: 'id'})
     public id: number;

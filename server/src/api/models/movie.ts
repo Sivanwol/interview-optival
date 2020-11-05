@@ -4,8 +4,11 @@ import { Column, Entity, JoinTable, OneToMany, PrimaryGeneratedColumn } from 'ty
 import { BaseModelCreationUpdateTimes } from '../utils/models/BaseModelCreationUpdateTimes';
 import { Emote } from './emote';
 
-@Entity()
+@Entity({
+    name: 'movies',
+})
 export class Movie extends  BaseModelCreationUpdateTimes {
+
     @PrimaryGeneratedColumn({name: 'id'})
     public id: number;
 

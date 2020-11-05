@@ -1,5 +1,5 @@
 import * as Faker from 'faker';
-import { EntityManager, MigrationInterface, QueryRunner } from 'typeorm';
+import { MigrationInterface, QueryRunner } from 'typeorm';
 
 import { Emote } from '../../api/models/emote';
 import { Movie } from '../../api/models/movie';
@@ -12,7 +12,7 @@ export class SeedData1604520038748 implements MigrationInterface {
         // await queryRunner.commitTransaction();
     }
 
-    public async createEmotes(queryRunner: QueryRunner) {
+    public async createEmotes(queryRunner: QueryRunner): Promise<void> {
         let query = 'INSERT INTO `emotes` (`name`, `alt`, `icon`) VALUES\n';
         const returnValues: Emote[] = [];
         let emote = new Emote();
@@ -30,20 +30,21 @@ export class SeedData1604520038748 implements MigrationInterface {
         emote.name = 'dislike';
         emote.icon = 'pi-thumbs-down';
         returnValues.push(emote);
-        returnValues.map(async (item , index) => query += ((index ===0) ? '': ',') + ` (\'${item.name}\', \'${item.alt}\', \'${item.icon}\')\n`);
+        returnValues.map(async (item , index) => query += ((index === 0) ? '' : ',') + ` (\'${item.name}\', \'${item.alt}\', \'${item.icon}\')\n`);
         await queryRunner.query(query);
-        return returnValues;
     }
-    public async createMovies(queryRunner: QueryRunner) {
+    public async createMovies(queryRunner: QueryRunner): Promise<void> {
         let query = 'INSERT INTO `movies` (`name`, `slug`, `description`, `imdb_link`) VALUES\n';
         const returnValues: Movie[] = [];
         for (let i = 0; i <= Faker.random.number(30); i++) {
             returnValues.push(this.createMovieObject());
         }
-        returnValues.map(async (item , index) => query += ((index ===0) ? '': ',') + ` (\'${item.name}\', \'${item.slug}\', \'${item.description}\', \'${item.imdb_link}\')\n`);
+        returnValues.map(async (item , index) => query += ((index === 0) ? '' : ',') + ` (\'${item.name}\', \'${item.slug}\', \'${item.description}\', \'${item.imdb_link}\')\n`);
         await queryRunner.query(query);
 
     }
+    // tslint:disable-next-line:no-empty
+    public async down(queryRunner: QueryRunner): Promise<any> {}
 
     private createMovieObject(): Movie {
         const movie = new Movie();
@@ -53,8 +54,6 @@ export class SeedData1604520038748 implements MigrationInterface {
         movie.imdb_link = Faker.internet.url();
         movie.emotes = [];
         return movie;
-    }
-    public async down(queryRunner: QueryRunner): Promise<any> {
     }
 
 }
